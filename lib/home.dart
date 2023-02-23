@@ -54,14 +54,14 @@ class _HomepageState extends State<Homepage> {
       "Top slot reserved for better search",
       "Rental agreement delivered to your home",
       "Privacy of your contact number",
-    ],name: "Premium Plus",num: [
-      "1","2","3","4","5","6","7","8"
-,"9"    ])
+    ],name: "Premium Plus",
+    )
   ];
 
   int? value;
   List chosen=[];
   String s='';
+  int amt=0;
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +113,8 @@ class _HomepageState extends State<Homepage> {
                                         setState(() {
                                          chosen=details[index].benefits;
                                          s=details[index].name;
+                                         amt=details[index].amount;
+
                                         });
                                       },
                                     ),
@@ -131,6 +133,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
               ),
+              SizedBox(height: 20,),
 
               Align(alignment: Alignment.centerLeft,
                   child: Text("Benefits Provided",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),)),
@@ -143,6 +146,7 @@ class _HomepageState extends State<Homepage> {
                   return CheckboxListTile(
                     title: Text("${chosen[index]}",style: TextStyle(fontWeight: FontWeight.w500),),
                     value: isChecked ,
+                    selected: isChecked,
                     onChanged: (bool? value) {
                       setState(() {
                         isChecked = value!;
@@ -152,36 +156,36 @@ class _HomepageState extends State<Homepage> {
                       height: 20,
                       width: 20,
                       color: Colors.red,
-                      child: Center(child: Text("#", style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 15),)),
+                      child:Icon(Icons.add_circle,size: 13,)
                     ),
                   );
 
-                   /* Row(
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        color: Colors.red,
-                        child: Center(child: Text("${num[i]}", style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),)),
-                      ),
-                      Checkbox(value: isChecked, onChanged: (bool? value){
+                }
+              ),
+              /*Row(
+                children: [
+                  Container(
+                      height: 20,
+                      width: 20,
+                      color: Colors.red,
+                      child:Icon(Icons.add_circle,size: 13,)
+                  ),
+                  Text("${chosen}",style: TextStyle(fontWeight: FontWeight.w500),),
+                  Checkbox(
+                      value: isChecked,
+                      onChanged: (bool? value){
                         setState(() {
                           isChecked=value!;
                         });
                       }
-                      ),
-                    ],
-                  );*/
-
-                }
-              ),
+                  )
+                ],
+              ),*/
               SizedBox(height: 30,),
               TextButton(onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  Payment_page(value!)),
+                  MaterialPageRoute(builder: (context) =>  Payment_page(amt!)),
                 );
               },
                   child: Container(
